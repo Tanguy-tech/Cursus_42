@@ -6,9 +6,11 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 05:40:57 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/02 16:46:46 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/02 17:15:40 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
 
 #include "get_next_line.h"
 
@@ -47,6 +49,7 @@ int		get_next_line(int fd, char **line)
 	static char *tmp = NULL;
 	char		*next;
 	int			re;
+	int			i;
 
 	buff[BUFFER_SIZE] = '\0';
 	if (tmp == NULL) 
@@ -66,6 +69,9 @@ int		get_next_line(int fd, char **line)
 		if (re == -1)
 			return (-1);
 		tmp = ft_strjoin(tmp, buff);
+		i = 0;
+		while (buff[i])
+			buff[i++] = 0;
 		next = save_next(tmp, '\n');
 	}
 	*line = ft_substr(tmp, 0, (ft_strlen(tmp) - ft_strlen(next) - 1));
