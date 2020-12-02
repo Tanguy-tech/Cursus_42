@@ -6,56 +6,70 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 05:40:57 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/01 08:05:24 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/02 16:46:46 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_free(char **s)
+char	*save_next(char *s, char c)
 {
-	char *tmp;
+	int		i;
+	int		j;
+	char	*next;
 
-	tmp = *s;
-	free(tmp);
-	*s = NULL;
+	i = 0;
+	while (s[i] != c && s[i])
+		i++;
+	if (s[i++] == c && s[i])
+	{
+		j = i;
+		while (s[j])
+			j++;
+		if (!(next = ft_calloc(sizeof(char), j + 1)))
+			return (0);
+		j = 0;
+		while (s[i])
+		{
+			next[j] = s[i];
+			j++;
+			i++;
+		}
+		next[j] = '\0';
+		return (next);
+	}
+	return (0);
 }
 
 int		get_next_line(int fd, char **line)
 {
 	char		buff[BUFFER_SIZE + 1];
-	static char *membuff;
-	char		*end_line;
+	static char *tmp = NULL;
+	char		*next;
+	int			re;
 
-	buff[BUFFER_SIZE] = '\0'; /* on met '\0' a la fin de la chaine buff longue de BUFFER_SIZE */
-	if (membuff == NULL)
+	buff[BUFFER_SIZE] = '\0';
+	if (tmp == NULL) 
+		if(!(tmp = newstr(0)))
+			return (-1);
+	next = save_next(tmp, '\n');
+	while (!next)
 	{
-			if (!(membuff = new_str(0))) /* creation de membuff -> initialisation a len 0 */
-				return (-1);
-	}
-	else if ((end_line = ft_strchr(membuff, '\n')))
-	{
-		*line = ft_substr(membuff, 0, ft_strlen(membuff) - ft_strlen(end_line) - 1);
-		membuff = end_line;
-		return (1);
-	}
-	while ((read(fd, buff, BUFFER_SIZE)) > 0) /* tant qu'il est possible de lire le fichier  */
-	{
-			membuff = ft_strjoin(membuff, buff);
-		if ((end_line = ft_strchr(membuff, '\n')))
+		if ((re = read(fd, buff, BUFFER_SIZE)) == 0)
 		{
-			*line = ft_substr(membuff, 0, ft_strlen(membuff) - ft_strlen(end_line) - 1);
-			membuff = end_line;
-			return (1);
+			if (!next)
+			{
+				*line = NULL;
+				return (0);
+			}
 		}
+		if (re == -1)
+			return (-1);
+		tmp = ft_strjoin(tmp, buff);
+		next = save_next(tmp, '\n');
 	}
-	if (ft_strlen(membuff) > 0)
-	{
-		*line = membuff;
-		ft_free(&membuff);
-		return (1);
-	}
-	ft_free(&membuff);
-	*line = membuff;
-	return (0);
+	*line = ft_substr(tmp, 0, (ft_strlen(tmp) - ft_strlen(next) - 1));
+	free(tmp);
+	tmp = next;
+	return (1);
 }
