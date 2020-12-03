@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 05:40:57 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/03 09:23:45 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/03 15:41:33 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ int		get_next_line(int fd, char **line)
 		if ((re = read(fd, buff, BUFFER_SIZE)) == 0)
 			return (get_line(line, &tmp[fd], &next, 0));
 		if (re == -1)
+		{
+			free(tmp[fd]);
 			return (-1);
+		}
 		buff[re] = '\0';
 		tmp[fd] = ft_strjoin(tmp[fd], buff);
 	}
