@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 05:40:57 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/03 09:14:51 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/03 09:23:45 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*save_next(char *s, char c)
 {
@@ -44,7 +44,7 @@ char	*save_next(char *s, char c)
 int		get_line(char **line, char **tmp, char **next, int val)
 {
 	*line = ft_substr(*tmp, 0, (ft_strlen(*tmp) - ft_strlen(*next)));
-	*tmp = ft_substr(*next, 1, (ft_strlen(*next) -1));
+	*tmp = ft_substr(*next, 1, (ft_strlen(*next) - 1));
 	return (val);
 }
 
@@ -57,8 +57,8 @@ int		get_next_line(int fd, char **line)
 
 	if (line == NULL || fd < 0 || BUFFER_SIZE <= 0)
 		return (-1);
-	if (tmp[fd] == NULL) 
-		if(!(tmp[fd] = newstr(0)))
+	if (tmp[fd] == NULL)
+		if (!(tmp[fd] = newstr(0)))
 			return (-1);
 	while (!(next = save_next(tmp[fd], '\n')))
 	{
