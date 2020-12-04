@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 10:10:13 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/04 13:30:45 by tbillon          ###   ########lyon.fr   */
+/*   Created: 2020/11/27 16:04:59 by tbillon           #+#    #+#             */
+/*   Updated: 2020/11/28 12:23:01 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	unsigned char	*str_;
-	int				i;
-	int				neg;
-	int				res;
+	t_list	*new;
+	t_list	*new_el;
 
-	i = 0;
-	neg = 0;
-	res = 0;
-	str_ = (unsigned char *)str;
-	while ((str_[i] >= 9 && str_[i] <= 13) || (str_[i] == 32))
-		i++;
-	if (str_[i] == '-' || str_[i] == '+')
-		if (str_[i++] == '-')
-			neg++;
-	while (str_[i] >= 48 && str_[i] <= 57)
-		res = res * 10 + (str_[i++] - 48);
-	if (neg % 2 == 1)
-		res = res * -1;
-	return (res);
+	if (!lst || !f)
+		return (0);
+	new = 0;
+	while (lst)
+	{
+		if (!(new_el = ft_lstnew((*f)(lst->content))))
+		{
+			ft_lstclear(&new_el, del);
+			ft_lstclear(&new, del);
+			return (0);
+		}
+		ft_lstadd_back(&new, new_el);
+		lst = lst->next;
+	}
+	return (new);
 }

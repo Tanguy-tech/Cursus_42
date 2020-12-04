@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 10:10:13 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/04 13:30:45 by tbillon          ###   ########lyon.fr   */
+/*   Created: 2020/11/24 10:23:38 by tbillon           #+#    #+#             */
+/*   Updated: 2020/11/26 10:06:26 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char	*str_;
-	int				i;
-	int				neg;
-	int				res;
+	size_t			count;
+	unsigned char	*string;
 
-	i = 0;
-	neg = 0;
-	res = 0;
-	str_ = (unsigned char *)str;
-	while ((str_[i] >= 9 && str_[i] <= 13) || (str_[i] == 32))
-		i++;
-	if (str_[i] == '-' || str_[i] == '+')
-		if (str_[i++] == '-')
-			neg++;
-	while (str_[i] >= 48 && str_[i] <= 57)
-		res = res * 10 + (str_[i++] - 48);
-	if (neg % 2 == 1)
-		res = res * -1;
-	return (res);
+	count = 0;
+	string = (unsigned char *)s;
+	while (count < n)
+	{
+		if (string[count] == (unsigned char)c)
+			return (string + count);
+		count++;
+	}
+	return (0);
 }

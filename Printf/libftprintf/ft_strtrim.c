@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 10:10:13 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/04 13:30:45 by tbillon          ###   ########lyon.fr   */
+/*   Created: 2020/11/25 11:31:20 by tbillon           #+#    #+#             */
+/*   Updated: 2020/11/26 12:41:13 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	unsigned char	*str_;
-	int				i;
-	int				neg;
-	int				res;
+	size_t	s1_len;
+	char	*tab;
 
-	i = 0;
-	neg = 0;
-	res = 0;
-	str_ = (unsigned char *)str;
-	while ((str_[i] >= 9 && str_[i] <= 13) || (str_[i] == 32))
-		i++;
-	if (str_[i] == '-' || str_[i] == '+')
-		if (str_[i++] == '-')
-			neg++;
-	while (str_[i] >= 48 && str_[i] <= 57)
-		res = res * 10 + (str_[i++] - 48);
-	if (neg % 2 == 1)
-		res = res * -1;
-	return (res);
+	if (!s1 || !set)
+		return (0);
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	s1_len = ft_strlen(s1);
+	while (s1_len && ft_strchr(set, s1[s1_len]))
+		s1_len--;
+	if (!(tab = ft_substr(s1, 0, (s1_len + 1))))
+		return (0);
+	tab[s1_len + 1] = '\0';
+	return (tab);
 }

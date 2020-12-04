@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 10:10:13 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/04 13:30:45 by tbillon          ###   ########lyon.fr   */
+/*   Created: 2020/11/25 11:16:10 by tbillon           #+#    #+#             */
+/*   Updated: 2020/11/28 12:42:53 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned char	*str_;
-	int				i;
-	int				neg;
-	int				res;
+	char	*tab;
+	int		len_tot;
+	int		i;
+	int		j;
 
-	i = 0;
-	neg = 0;
-	res = 0;
-	str_ = (unsigned char *)str;
-	while ((str_[i] >= 9 && str_[i] <= 13) || (str_[i] == 32))
-		i++;
-	if (str_[i] == '-' || str_[i] == '+')
-		if (str_[i++] == '-')
-			neg++;
-	while (str_[i] >= 48 && str_[i] <= 57)
-		res = res * 10 + (str_[i++] - 48);
-	if (neg % 2 == 1)
-		res = res * -1;
-	return (res);
+	if (!s1 || !s2)
+		return (0);
+	len_tot = ft_strlen(s1) + ft_strlen(s2);
+	i = -1;
+	j = -1;
+	if (!(tab = malloc(sizeof(char) * (len_tot + 1))))
+		return (0);
+	while (s1[++i] && i < len_tot)
+		tab[i] = s1[i];
+	while (s2[++j] && i < len_tot)
+		tab[i++] = s2[j];
+	tab[i] = '\0';
+	return (tab);
 }

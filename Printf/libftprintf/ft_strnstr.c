@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 10:10:13 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/04 13:30:45 by tbillon          ###   ########lyon.fr   */
+/*   Created: 2020/11/25 09:17:50 by tbillon           #+#    #+#             */
+/*   Updated: 2020/11/26 11:05:15 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	unsigned char	*str_;
-	int				i;
-	int				neg;
-	int				res;
+	size_t	i;
+	size_t	j;
+	char	*hay;
 
 	i = 0;
-	neg = 0;
-	res = 0;
-	str_ = (unsigned char *)str;
-	while ((str_[i] >= 9 && str_[i] <= 13) || (str_[i] == 32))
+	hay = (char *)haystack;
+	if (needle[0] == '\0')
+		return (hay);
+	while (hay[i] && i < len)
+	{
+		j = 0;
+		while (hay[i + j] == needle[j] && i + j < len)
+		{
+			if (needle[++j] == '\0')
+				return (hay + i);
+		}
 		i++;
-	if (str_[i] == '-' || str_[i] == '+')
-		if (str_[i++] == '-')
-			neg++;
-	while (str_[i] >= 48 && str_[i] <= 57)
-		res = res * 10 + (str_[i++] - 48);
-	if (neg % 2 == 1)
-		res = res * -1;
-	return (res);
+	}
+	return (0);
 }

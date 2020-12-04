@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 10:10:13 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/04 13:30:45 by tbillon          ###   ########lyon.fr   */
+/*   Created: 2020/11/24 13:25:16 by tbillon           #+#    #+#             */
+/*   Updated: 2020/11/26 10:37:21 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+char	*ft_strchr(const char *s, int c)
 {
-	unsigned char	*str_;
 	int				i;
-	int				neg;
-	int				res;
+	unsigned char	to_find;
+	char			*haystack;
 
 	i = 0;
-	neg = 0;
-	res = 0;
-	str_ = (unsigned char *)str;
-	while ((str_[i] >= 9 && str_[i] <= 13) || (str_[i] == 32))
+	to_find = (unsigned char)c;
+	haystack = (char *)s;
+	while (haystack[i])
 		i++;
-	if (str_[i] == '-' || str_[i] == '+')
-		if (str_[i++] == '-')
-			neg++;
-	while (str_[i] >= 48 && str_[i] <= 57)
-		res = res * 10 + (str_[i++] - 48);
-	if (neg % 2 == 1)
-		res = res * -1;
-	return (res);
+	if ((to_find) == '\0')
+		return (&haystack[i]);
+	i = 0;
+	while (haystack[i] != to_find && haystack[i])
+		i++;
+	if (haystack[i] != '\0')
+		return (haystack + i);
+	else
+		return (0);
 }

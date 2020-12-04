@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 10:10:13 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/04 13:30:45 by tbillon          ###   ########lyon.fr   */
+/*   Created: 2020/11/24 14:52:09 by tbillon           #+#    #+#             */
+/*   Updated: 2020/11/27 11:46:40 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	unsigned char	*str_;
-	int				i;
-	int				neg;
-	int				res;
+	size_t			i;
+	size_t			j;
+	unsigned char	*dest;
 
 	i = 0;
-	neg = 0;
-	res = 0;
-	str_ = (unsigned char *)str;
-	while ((str_[i] >= 9 && str_[i] <= 13) || (str_[i] == 32))
+	j = 0;
+	dest = (unsigned char *)dst;
+	if (!dest || !src)
+		return (0);
+	if (dstsize == 0)
+	{
+		while ((unsigned char)src[i])
+			i++;
+		return (i);
+	}
+	while (i < dstsize - 1 && (unsigned char)src[i])
+	{
+		dest[i] = (unsigned char)src[i];
 		i++;
-	if (str_[i] == '-' || str_[i] == '+')
-		if (str_[i++] == '-')
-			neg++;
-	while (str_[i] >= 48 && str_[i] <= 57)
-		res = res * 10 + (str_[i++] - 48);
-	if (neg % 2 == 1)
-		res = res * -1;
-	return (res);
+	}
+	dest[i] = '\0';
+	while ((unsigned char)src[i])
+		i++;
+	return (i);
 }

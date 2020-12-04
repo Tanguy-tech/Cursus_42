@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 10:10:13 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/04 13:30:45 by tbillon          ###   ########lyon.fr   */
+/*   Created: 2020/11/25 11:06:33 by tbillon           #+#    #+#             */
+/*   Updated: 2020/11/26 12:17:15 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned char	*str_;
-	int				i;
-	int				neg;
-	int				res;
+	char		*tab;
+	size_t		i;
+	size_t		s_len;
 
+	if (!s)
+		return (0);
+	s_len = ft_strlen(s);
+	if (s_len < start)
+	{
+		if (!(tab = malloc(sizeof(char) * 1)))
+			return (0);
+		tab[0] = '\0';
+		return (tab);
+	}
+	if (!(tab = malloc(sizeof(char) * (len + 1))))
+		return (0);
 	i = 0;
-	neg = 0;
-	res = 0;
-	str_ = (unsigned char *)str;
-	while ((str_[i] >= 9 && str_[i] <= 13) || (str_[i] == 32))
+	while (i < len)
+	{
+		tab[i] = s[start + i];
 		i++;
-	if (str_[i] == '-' || str_[i] == '+')
-		if (str_[i++] == '-')
-			neg++;
-	while (str_[i] >= 48 && str_[i] <= 57)
-		res = res * 10 + (str_[i++] - 48);
-	if (neg % 2 == 1)
-		res = res * -1;
-	return (res);
+	}
+	tab[i] = '\0';
+	return (tab);
 }
