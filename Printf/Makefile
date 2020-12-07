@@ -6,11 +6,11 @@
 #    By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/04 10:11:35 by tbillon           #+#    #+#              #
-#    Updated: 2020/12/04 14:02:43 by tbillon          ###   ########lyon.fr    #
+#    Updated: 2020/12/04 15:04:42 by tbillon          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	ft_printf.c ft_parser.c
+SRCS	=	ft_printf.c ft_parser.c checks.c 
 
 OBJS	= $(SRCS:.c=.o)
 
