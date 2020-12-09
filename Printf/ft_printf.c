@@ -6,98 +6,71 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:34:28 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/07 11:08:18 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/09 16:11:41 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t		define_fmt_itoa(char type, va_list args)
+t_Printf	*initialize_struct(void)
 {
-	char	*str;
-	size_t	len;
+	t_Printf	*new_struct;
 
-	if (type == 'd' || type == 'i')
-		str = ft_itoa(va_arg(args, int));
-	if (type == 'u')
-		str = ft_itoa(va_arg(args, unsigned int));
-	ft_putstr(str);
-	len = ft_strlen(str);
-	free(str);
-	return (len);
+	if (!(new_struct = malloc(sizeof(t_Printf))))
+		return (0);
+
+	new_struct->type = '\0';
+	new_struct->flags = 0;
+	new_struct->width = 0;
+	new_struct->precision = 1;
+	new_struct->result = 0;
+	return (new_struct);
 }
 
-size_t		define_fmt_sc(char type, va_list args)
+t_Printf	*reset_struct(t_Printf *struct_name)
 {
-	size_t	len;
-
-	if (type == 'c')
-		len = ft_putchar(va_arg(args, int));
-	if (type == 's')
-		len = ft_putstr(va_arg(args, char *));
-	return (len);
+	struct_name->type = '\0';
+	struct_name->flags = 0;
+	struct_name->width = 0;
+	struct_name->precision = 1;
+	struct_name->result = struct_name->result;
+	return (struct_name);
 }
 
-size_t		define_fmt_pxX(char type, va_list args)
+int			ft_printf(const char *format, ...)
 {
-	size_t	len;
-	char	*base;
-	char	*base_maj;
+	va_list			args;
+	t_Printf		*print_f;
+	int				i;
+	int				len;
 
-	base = "0123456789abcdef";
-	base_maj = "0123456789ABCDEF";
-	if (type == 'p')
-		len = ft_putstr("0x") + ft_putstr(ft_itoa_base(va_arg(args, long), base));
-	if (type == 'x')
-		len = ft_putstr(ft_itoa_base(va_arg(args, int), base));
-	if (type == 'X')
-		len = ft_putstr(ft_itoa_base(va_arg(args, int), base_maj));
-	return (len);
-}
-
-int		ft_printf(const char *fmt, ...)
-{
-	va_list		args;
-	char		type;
-	int			i;
-	int			len;
-
+	if (!(print_f = initialize_struct()))
+		return (-1);
+	va_start(args, format);
 	i = 0;
-	len = 0;
-	va_start(args, fmt);
-	while (fmt[i])
+	while (format[i])
 	{
-		if (fmt[i] != '%')
+		if (format[i] == '%')
 		{
-			ft_putchar(fmt[i]);
-			i++;
+			i += parse_format(format + i + 1, print_f, args);
+			print_f = reset_struct(print_f);
 		}
-		else if (fmt[i] == '%')
-		{
-			while (fmt[i + 1] == ' ')
-				fmt++;
-			type = fmt[i + 1];
-			if (type == 'c' || type == 's')
-				len += define_fmt_sc(type, args);
-			if (type == 'd' || type == 'u' || type == 'i')
-				len += define_fmt_itoa(type, args);
-			if (type == 'p' || type == 'x' || type == 'X')
-				len += define_fmt_pxX(type, args);
-			if (type == '%')
-				len += ft_putchar('%');
-			fmt += 2;
-		}
+		else
+			print_f->result += ft_putchar(format[i]);
+		i++;
 	}
+	len = print_f->result;
+	free(print_f);
 	va_end(args);
-	return (len + i);
+	return (len);
 }
 
 int		main(void)
 {
-	char	*str;
-	int		test;
-	char	char1;
-	char	char2;
+	char			*str;
+	int				test;
+	char			char1;
+	char			char2;
 	unsigned int	hex;
 
 	test = 1234;
@@ -106,8 +79,8 @@ int		main(void)
 	char1 = 'O';
 	char2 = 'K';
 
-	ft_printf(" %d", ft_printf("COUCOU %s %d %c-%c %p %x %X", str, test, char1, char2, str, hex, hex));
+	ft_printf(" %d", ft_printf("Coucou %03c %3c %012s %010d %p %x %X",char2, char2, str, test, str, hex, hex));
 	printf("\n");
-	printf(" %d", printf("COUCOU %s %d %c-%c %p %x %X", str, test, char1, char2, str, hex, hex));
+	printf(" %d", printf("Coucou %03c %3c %012s %010d %p %x %X",char2, char2, str, test, str, hex, hex));
 	return (0);
 }

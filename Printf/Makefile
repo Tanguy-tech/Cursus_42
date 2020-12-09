@@ -6,11 +6,14 @@
 #    By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/04 10:11:35 by tbillon           #+#    #+#              #
-#    Updated: 2020/12/04 15:04:42 by tbillon          ###   ########lyon.fr    #
+#    Updated: 2020/12/09 16:34:53 by tbillon          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	ft_printf.c ft_parser.c checks.c 
+SRCS	=	ft_printf.c ft_width.c ft_width_utils.c ft_parsing.c ft_converter.c\
+			libftprintf/ft_itoa.c libftprintf/ft_itoa_base.c \
+			libftprintf/ft_putchar.c libftprintf/ft_putstr.c \
+			libftprintf/ft_strlen.c libftprintf/ft_strjoin.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -33,7 +36,7 @@ all:		$(NAME)
 clean:
 			$(RM) $(OBJS)
 
-fclean:		clean
+rsu	fclean:		clean
 			$(RM) $(NAME)
 
 re:			fclean all

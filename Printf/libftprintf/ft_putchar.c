@@ -6,13 +6,13 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 18:44:15 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/05 16:40:57 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/09 11:05:55 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_putchar(char c)
+int		ft_putchar(char c)
 {
 	write(1, &c, 1);
 	return (1);

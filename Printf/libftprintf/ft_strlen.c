@@ -6,13 +6,13 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:59:47 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/07 10:29:11 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/09 11:06:14 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strlen(char *s)
+int		ft_strlen(char *s)
 {
 	int i;
 

@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_width.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 08:16:01 by tbillon           #+#    #+#             */
-/*   Updated: 2020/11/28 12:41:05 by tbillon          ###   ########lyon.fr   */
+/*   Created: 2020/12/09 13:16:26 by tbillon           #+#    #+#             */
+/*   Updated: 2020/12/09 16:14:22 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t		ft_strlcat(char *dst, char *src, size_t dstsize)
+int		add_width(t_Printf *print_f, va_list args, const char *format)
 {
-	size_t	len_dst;
-	size_t	len_src;
-	size_t	i;
+	char	*str;
+	int		i;
 
 	i = 0;
-	len_dst = ft_strlen(dst);
-	len_src = ft_strlen(src);
-	if (dstsize == 0)
-		return (len_src);
-	if (dstsize <= len_dst)
-		return (dstsize + len_src);
-	while (dst[i] && i < dstsize)
+	while (ft_isdigit(format[i]) == 1)
 		i++;
-	while (i < dstsize - 1 && *src)
+	if (!(str = malloc(sizeof(char) * (i + 1))))
+		return (0);
+	i = 0;
+	while (ft_isdigit(format[i]) == 1)
 	{
-		dst[i] = *src;
+		str[i] = format[i];
 		i++;
-		src++;
 	}
-	dst[i] = '\0';
-	return (len_dst + len_src);
+	str[i] = '\0';
+	if (str[0] == '0')
+		print_f->flags = 1;
+	print_f->width = ft_atoi(str);
+	i = ft_strlen(str);
+	return (i);
 }
