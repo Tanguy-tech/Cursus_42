@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:29:30 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/09 13:15:16 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/09 16:39:59 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
-
 
 int		ft_putchar(char c);
 int		ft_putstr(char *str);

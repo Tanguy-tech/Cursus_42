@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 08:18:26 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/09 13:53:36 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/09 16:44:22 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		regular_types(char c)
 {
-	int  i;
-	char *types;
+	int		i;
+	char	*types;
 
 	types = "cspdiuxX%";
 	i = 0;

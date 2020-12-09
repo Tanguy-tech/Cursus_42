@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:34:28 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/09 16:11:41 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/09 16:43:59 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_Printf	*initialize_struct(void)
 
 	if (!(new_struct = malloc(sizeof(t_Printf))))
 		return (0);
-
 	new_struct->type = '\0';
 	new_struct->flags = 0;
 	new_struct->width = 0;
@@ -65,7 +64,7 @@ int			ft_printf(const char *format, ...)
 	return (len);
 }
 
-int		main(void)
+int			main(void)
 {
 	char			*str;
 	int				test;
@@ -78,9 +77,8 @@ int		main(void)
 	str = "Tanguy";
 	char1 = 'O';
 	char2 = 'K';
-
-	ft_printf(" %d", ft_printf("Coucou %03c %3c %012s %010d %p %x %X",char2, char2, str, test, str, hex, hex));
+	ft_printf(" %d", ft_printf("Coucou %012s %p", char2, str, test, hex));
 	printf("\n");
-	printf(" %d", printf("Coucou %03c %3c %012s %010d %p %x %X",char2, char2, str, test, str, hex, hex));
+	printf(" %d", printf("Coucou %012s %p", char2, str, test, hex));
 	return (0);
 }
