@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:24:36 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/10 08:57:52 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/10 13:44:30 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void			define_convert_args(t_Printf *print_f, va_list args, char type);
 void			convert_cs(t_Printf *print_f, va_list args);
 void			convert_num(t_Printf *print_f, va_list args);
 void			convert_pxx(t_Printf *print_f, va_list args);
-void			convert_percent(t_Printf *print_f, va_list args);
+void			convert_percent(t_Printf *print_f);
 
 /*----- Width controller -----*/
-int			add_width(t_Printf *print_f, va_list args, const char *format);
+int			add_width(t_Printf *print_f, const char *format);
 void		spaces_type_width(t_Printf *print_f, int len);
 void		zero_type_width(t_Printf *print_f, int len);
 void		write_width_c(t_Printf *print_f);
@@ -51,8 +51,11 @@ void		write_width_str(t_Printf *print_f, char *str);
 void		write_width_num(t_Printf *print_f, int num);
 
 /*---- Justify controller ---*/
-int			justify(t_Printf *print_f, va_list args, char pad);
+int			justify(t_Printf *print_f, const char *pad);
 void		str_pad_width(t_Printf *print_f, char *str);
 void		num_pad_width(t_Printf *print_f, int i);
+
+/*--- Precision controller --*/
+int			set_precision(t_Printf *print_f, const char *prec);
 
 #endif

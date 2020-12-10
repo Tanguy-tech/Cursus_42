@@ -6,13 +6,13 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 13:16:26 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/10 08:14:59 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/10 14:53:00 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		add_width(t_Printf *print_f, va_list args, const char *format)
+int		add_width(t_Printf *print_f, const char *format)
 {
 	char	*str;
 	int		i;
@@ -32,6 +32,8 @@ int		add_width(t_Printf *print_f, va_list args, const char *format)
 	if (str[0] == '0' && print_f->flags == 0)
 		print_f->flags = 1;
 	print_f->width = ft_atoi(str);
+	if (print_f->flags == 3)
+		print_f->width -= 1;
 	i = ft_strlen(str);
 	return (i);
 }

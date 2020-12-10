@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 08:25:42 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/10 08:58:30 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/10 15:02:12 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	define_convert_args(t_Printf *print_f, va_list args, char type)
 	else if (type == 'p' || type == 'x' || type == 'X')
 		convert_pxx(print_f, args);
 	else if (type == '%')
-		convert_percent(print_f, args);
+		convert_percent(print_f);
 }
 
 void	convert_cs(t_Printf *print_f, va_list args)
@@ -60,13 +60,17 @@ void	convert_num(t_Printf *print_f, va_list args)
 	if (print_f->type == 'i')
 	{
 		i = va_arg(args, unsigned int);
-		if (print_f->flags == 2)
-			print_f->result += ft_putstr(ft_itoa(i));
+		if (print_f->flags == 2 || print_f->flags == 3)
+		{
+			if (print_f->flags == 3)
+				print_f->result += ft_putchar('+');
+			print_f->result += ft_putstr(ft_itoa(i), ft_size_num(i));
+		}
 		if (print_f->width >= 0)
 		{
 			write_width_num(print_f, i);
-			if (print_f->flags != 2)
-				print_f->result += ft_putstr(ft_itoa(i));
+			if (print_f->flags != 2 && print_f->flags != 3)
+				print_f->result += ft_putstr(ft_itoa(i), ft_size_num(i));
 		}
 	}
 }
@@ -92,7 +96,7 @@ void	convert_pxx(t_Printf *print_f, va_list args)
 	}
 }
 
-void	convert_percent(t_Printf *print_f, va_list args)
+void	convert_percent(t_Printf *print_f)
 {
 	if (print_f->flags == 2)
 		print_f->result += ft_putchar('%');

@@ -6,17 +6,32 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 07:58:46 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/10 08:13:53 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/10 13:44:23 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		justify(t_Printf *print_f, va_list args, char pad)
+int		justify(t_Printf *print_f, const char *pad)
 {
-	if (pad == '-')
-		print_f->flags = 2;
-	else if (pad == '+')
+	int minus;
+	int plus;
+	int i;
+
+	i = 0;
+	minus = 0;
+	plus = 0;
+	while (pad[i] == '+' || pad[i] == '-')
+	{
+		if (pad[i] == '-')
+			minus++;
+		if (pad[i] == '+')
+			plus++;
+		i++;
+	}
+	if (plus > 0)
 		print_f->flags = 3;
-	return (1);
+	else
+		print_f->flags = 2;
+	return (i);
 }

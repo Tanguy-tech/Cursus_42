@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 08:18:26 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/10 09:04:55 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/10 13:44:44 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ int		parse_format(const char *format, t_Printf *print_f, va_list args)
 	while (format[i])
 	{
 		if (format[i] == '-' || format[i] == '+')
-			i += justify(print_f, args, format[i]);
+			i += justify(print_f, format + i);
 		if (ft_isdigit(format[i]) == 1)
-			i += add_width(print_f, args, format + i);
+			i += add_width(print_f, format + i);
+		if (format[i] == '.')
+			i += set_precision(print_f, format + i + 1);
 		if (regular_types(format[i]) == 1)
 		{
 			print_f->type = format[i];
