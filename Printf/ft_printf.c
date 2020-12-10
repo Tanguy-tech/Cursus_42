@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:34:28 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/09 16:43:59 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/10 09:04:09 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int			main(void)
 	str = "Tanguy";
 	char1 = 'O';
 	char2 = 'K';
-	ft_printf(" %d", ft_printf("Coucou %012s %p", char2, str, test, hex));
+	ft_printf(" %d", ft_printf("Coucou %012d %0s %12c %12% %12x", test, str, char2, hex));
 	printf("\n");
-	printf(" %d", printf("Coucou %012s %p", char2, str, test, hex));
+	printf(" %d", printf("Coucou %012d %0s %12c %12% %12x", test, str, char2, hex));
 	return (0);
 }

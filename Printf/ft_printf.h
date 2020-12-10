@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:24:36 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/09 16:46:26 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/10 08:57:52 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,13 @@ void			convert_percent(t_Printf *print_f, va_list args);
 int			add_width(t_Printf *print_f, va_list args, const char *format);
 void		spaces_type_width(t_Printf *print_f, int len);
 void		zero_type_width(t_Printf *print_f, int len);
-void		write_width_c(t_Printf *print_f, va_list args);
-void		write_width_str(t_Printf *print_f, va_list args, char *str);
-void		write_width_num(t_Printf *print_f, va_list args, int num);
+void		write_width_c(t_Printf *print_f);
+void		write_width_str(t_Printf *print_f, char *str);
+void		write_width_num(t_Printf *print_f, int num);
+
+/*---- Justify controller ---*/
+int			justify(t_Printf *print_f, va_list args, char pad);
+void		str_pad_width(t_Printf *print_f, char *str);
+void		num_pad_width(t_Printf *print_f, int i);
 
 #endif
