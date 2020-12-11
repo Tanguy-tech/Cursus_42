@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 13:16:26 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/10 14:53:00 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/11 09:49:57 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,10 @@ int		add_width(t_Printf *print_f, const char *format)
 		print_f->width -= 1;
 	i = ft_strlen(str);
 	return (i);
+}
+
+int		add_star_width(t_Printf *print_f)
+{
+	print_f->width = -1;
+	return (1);
 }

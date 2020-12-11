@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 12:17:52 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/10 14:55:24 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/11 08:44:52 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,21 @@ int	ft_putstr(char *str, int prec)
 
 	i = 0;
 	prec = ft_abs(prec);
-	while (str[i] != '\0' && i < prec)
+	if (prec > 0)
 	{
-		ft_putchar(str[i]);
-		i++;
+		while (str[i] != '\0' && i < prec)
+		{
+			ft_putchar(str[i]);
+			i++;
+		}
+	}
+	else
+	{
+		while (str[i] != '\0')
+		{
+			ft_putchar(str[i]);
+			i++;
+		}
 	}
 	return (i);
 }

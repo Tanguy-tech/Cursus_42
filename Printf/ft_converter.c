@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 08:25:42 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/10 15:02:12 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/11 09:29:26 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	define_convert_args(t_Printf *print_f, va_list args, char type)
 	else if (type == 'p' || type == 'x' || type == 'X')
 		convert_pxx(print_f, args);
 	else if (type == '%')
-		convert_percent(print_f);
+		convert_percent(print_f, args);
 }
 
 void	convert_cs(t_Printf *print_f, va_list args)
@@ -31,6 +31,8 @@ void	convert_cs(t_Printf *print_f, va_list args)
 
 	if (print_f->type == 'c')
 	{
+		if (print_f->width == -1)
+			print_f->width = va_arg(args, int);
 		c = va_arg(args, int);
 		if (print_f->flags == 2)
 			print_f->result += ft_putchar(c);
@@ -43,6 +45,8 @@ void	convert_cs(t_Printf *print_f, va_list args)
 	}
 	if (print_f->type == 's')
 	{
+		if (print_f->width == -1)
+			print_f->width = va_arg(args, int);
 		str = va_arg(args, char*);
 		str_pad_width(print_f, str);
 	}
@@ -54,11 +58,15 @@ void	convert_num(t_Printf *print_f, va_list args)
 
 	if (print_f->type == 'd' || print_f->type == 'u')
 	{
+		if (print_f->width == -1)
+			print_f->width = va_arg(args, int);
 		i = va_arg(args, int);
 		num_pad_width(print_f, i);
 	}
 	if (print_f->type == 'i')
 	{
+		if (print_f->width == -1)
+			print_f->width = va_arg(args, int);
 		i = va_arg(args, unsigned int);
 		if (print_f->flags == 2 || print_f->flags == 3)
 		{
@@ -81,23 +89,31 @@ void	convert_pxx(t_Printf *print_f, va_list args)
 
 	if (print_f->type == 'p')
 	{
+		if (print_f->width == -1)
+			print_f->width = va_arg(args, long) - 2;
 		str = ft_itoa_base(va_arg(args, long), "0123456789abcdef");
 		str_pad_width(print_f, str);
 	}
 	if (print_f->type == 'x')
 	{
+		if (print_f->width == -1)
+			print_f->width = va_arg(args, int);
 		str = ft_itoa_base(va_arg(args, int), "0123456789abcdef");
 		str_pad_width(print_f, str);
 	}
 	if (print_f->type == 'X')
 	{
+		if (print_f->width == -1)
+			print_f->width = va_arg(args, int);
 		str = ft_itoa_base(va_arg(args, int), "0123456789ABCDEF");
 		str_pad_width(print_f, str);
 	}
 }
 
-void	convert_percent(t_Printf *print_f)
+void	convert_percent(t_Printf *print_f,va_list args)
 {
+	if (print_f->width == -1)
+		print_f->width = va_arg(args, int);
 	if (print_f->flags == 2)
 		print_f->result += ft_putchar('%');
 	if (print_f->width > 0)

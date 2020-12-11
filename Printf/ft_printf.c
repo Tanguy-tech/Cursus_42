@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:34:28 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/10 15:42:22 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/11 09:54:38 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,19 @@ int			main(void)
 {
 	char			*str;
 	int				test;
+	int				test2;
 	char			char1;
 	char			char2;
 	unsigned int	hex;
 
 	test = 123456789;
+	test2 = 123;
 	hex = 2147483647;
 	str = "Tanguy";
 	char1 = 'O';
 	char2 = 'K';
-	ft_printf(" %d", ft_printf("%-+5d", 10));
+	ft_printf(" %d", ft_printf("%*d %*s %*c %*p %*x %*X %*% %10%", 10, test, 10, str, 10, char2, 10, str, 10, hex, 10, hex, 10));
 	printf("\n");
-	printf(" %d", printf("%-+5d", 10));
+	printf(" %d", printf("%*d %*s %*c %*p %*x %*X %*% %10%", 10, test, 10, str, 10, char2, 10, str, 10, hex, 10, hex, 10));
 	return (0);
 }

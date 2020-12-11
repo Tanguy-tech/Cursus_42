@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 16:13:50 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/10 15:19:19 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/11 08:14:40 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	write_width_num(t_Printf *print_f, int num)
 	else
 	{
 		if (num <= 0)
+			spaces_type_width(print_f, ft_size_num(num) + 1);
+		else if (print_f->flags == 23)
 			spaces_type_width(print_f, ft_size_num(num) + 1);
 		else
 			spaces_type_width(print_f, ft_size_num(num));
