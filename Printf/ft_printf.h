@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:24:36 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/11 09:49:31 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/13 15:39:43 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_Printf
 	int	 flags; /* Flags "0->1" "- ->2" "+ ->3"*/
 	int	 width; /* number * => sets the minimum field width for an output value */
 	int	 precision; /* .number .* => max number of caracter to print (or minimum number fo interger digits) */
+	int  star;
 	int	 result; /* Will be the result of the printf function (integer that represent the lenght of the printed chars) */
 }				t_Printf;
 
@@ -43,20 +44,23 @@ void			convert_pxx(t_Printf *print_f, va_list args);
 void			convert_percent(t_Printf *print_f, va_list args);
 
 /*----- Width controller -----*/
-int			add_width(t_Printf *print_f, const char *format);
-int			add_star_width(t_Printf *print_f);
-void		spaces_type_width(t_Printf *print_f, int len);
-void		zero_type_width(t_Printf *print_f, int len);
-void		write_width_c(t_Printf *print_f);
-void		write_width_str(t_Printf *print_f, char *str);
-void		write_width_num(t_Printf *print_f, int num);
+int				add_width(t_Printf *print_f, const char *format);
+int				add_star_width(t_Printf *print_f);
+void			star_condition(t_Printf *print_f, va_list args);
+void			spaces_type_width(t_Printf *print_f, int len);
+void			zero_type_width(t_Printf *print_f, int len);
+void			write_width_c(t_Printf *print_f);
+void			write_width_str(t_Printf *print_f, char *str);
+void			write_width_num(t_Printf *print_f, int num);
 
 /*---- Justify controller ---*/
-int			justify(t_Printf *print_f, const char *pad);
-void		str_pad_width(t_Printf *print_f, char *str);
-void		num_pad_width(t_Printf *print_f, int i);
+int				justify(t_Printf *print_f, const char *pad);
+void			str_pad_width(t_Printf *print_f, char *str);
+void			num_pad_width(t_Printf *print_f, int i);
 
 /*--- Precision controller --*/
-int			set_precision(t_Printf *print_f, const char *prec);
+int				set_precision(t_Printf *print_f, const char *prec);
+void			write_precision(t_Printf *print_f, char *str);
+void			write_precision_diu(t_Printf *print_f, int i);
 
 #endif

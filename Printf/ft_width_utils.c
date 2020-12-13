@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 16:13:50 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/11 08:14:40 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/13 16:31:25 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,23 @@ void	write_width_str(t_Printf *print_f, char *str)
 	if (print_f->flags == 1)
 		zero_type_width(print_f, ft_strlen(str));
 	else
-		spaces_type_width(print_f, ft_strlen(str));
+	{
+		if (print_f->precision > 0)
+		{
+			if (print_f->precision > ft_strlen(str))
+				print_f->width += print_f->precision - ft_strlen(str);
+			spaces_type_width(print_f, print_f->precision);
+		}
+		if (print_f->precision < 0)
+			spaces_type_width(print_f, 0);
+		else if (print_f->precision == 0)
+		{
+			if (print_f->flags == 2)
+				spaces_type_width(print_f, ft_strlen(str) + 1);
+			else
+				spaces_type_width(print_f, ft_strlen(str));
+		}
+	}
 }
 
 void	write_width_num(t_Printf *print_f, int num)
@@ -63,8 +79,15 @@ void	write_width_num(t_Printf *print_f, int num)
 	}
 	else
 	{
-		if (num <= 0)
-			spaces_type_width(print_f, ft_size_num(num) + 1);
+		if (print_f->precision > 0)
+		{
+			if (print_f->precision > ft_size_num(num))
+				print_f->width = print_f->precision + ft_size_num(num);
+			zero_type_width(print_f, print_f->precision);
+			spaces_type_width(print_f, print_f->precision);
+		}
+		// if (num <= 0)
+		// 	spaces_type_width(print_f, ft_size_num(num) + 1);
 		else if (print_f->flags == 23)
 			spaces_type_width(print_f, ft_size_num(num) + 1);
 		else

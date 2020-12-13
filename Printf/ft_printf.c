@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:34:28 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/11 09:54:38 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/13 16:32:17 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_Printf	*initialize_struct(void)
 	new_struct->type = '\0';
 	new_struct->flags = 0;
 	new_struct->width = 0;
-	new_struct->precision = 1;
+	new_struct->star = 0;
+	new_struct->precision = 0;
 	new_struct->result = 0;
 	return (new_struct);
 }
@@ -31,7 +32,8 @@ t_Printf	*reset_struct(t_Printf *struct_name)
 	struct_name->type = '\0';
 	struct_name->flags = 0;
 	struct_name->width = 0;
-	struct_name->precision = 1;
+	struct_name->star = 0;
+	struct_name->precision = 0;
 	struct_name->result = struct_name->result;
 	return (struct_name);
 }
@@ -64,23 +66,21 @@ int			ft_printf(const char *format, ...)
 	return (len);
 }
 
-int			main(void)
-{
-	char			*str;
-	int				test;
-	int				test2;
-	char			char1;
-	char			char2;
-	unsigned int	hex;
+// int			main(void)
+// {
+// 	char			*str;
+// 	int				test;
+// 	char			char1;
+// 	char			char2;
+// 	unsigned int	hex;
 
-	test = 123456789;
-	test2 = 123;
-	hex = 2147483647;
-	str = "Tanguy";
-	char1 = 'O';
-	char2 = 'K';
-	ft_printf(" %d", ft_printf("%*d %*s %*c %*p %*x %*X %*% %10%", 10, test, 10, str, 10, char2, 10, str, 10, hex, 10, hex, 10));
-	printf("\n");
-	printf(" %d", printf("%*d %*s %*c %*p %*x %*X %*% %10%", 10, test, 10, str, 10, char2, 10, str, 10, hex, 10, hex, 10));
-	return (0);
-}
+// 	test = 123456789;
+// 	hex = 2147483647;
+// 	str = "Tanguy";
+// 	char1 = 'O';
+// 	char2 = 'K';
+// 	ft_printf(" |%d", ft_printf(" %-3.2d %10.42d ", 0, 0));
+// 	printf("\n");
+// 	printf(" |%d", printf(" %-3.2d %10.42d ", 0, 0));
+// 	return (0);
+// }

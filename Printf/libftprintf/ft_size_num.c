@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 09:21:51 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/10 15:17:39 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/13 15:53:23 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		ft_size_num(int x)
 	size_t i;
 
 	i = 0;
+	if (x == 0)
+		return (1);
 	if (!x)
 		return (0);
 	while (x != 0)
