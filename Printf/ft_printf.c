@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:34:28 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/13 16:32:17 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/14 17:25:41 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int			ft_printf(const char *format, ...)
 // 	str = "Tanguy";
 // 	char1 = 'O';
 // 	char2 = 'K';
-// 	ft_printf(" |%d", ft_printf(" %-3.2d %10.42d ", 0, 0));
+// 	ft_printf(" |%d", ft_printf(" 0*%-0*.10d*0 0*%-0*.0d*0 ", 21, 1021, 21, -1011));
 // 	printf("\n");
-// 	printf(" |%d", printf(" %-3.2d %10.42d ", 0, 0));
+// 	printf(" |%d", printf(" 0*%-0*.10d*0 0*%-0*.0d*0 ", 21, 1021, 21, -1011));
 // 	return (0);
 // }

@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 07:58:46 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/11 14:23:07 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/14 17:05:54 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int		justify(t_Printf *print_f, const char *pad)
 		print_f->flags = 2;
 	if (plus > 0 && minus > 0)
 		print_f->flags = 23;
+	
 	return (i);
 }

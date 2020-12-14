@@ -6,18 +6,23 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 12:37:18 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/13 16:22:41 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/14 17:25:12 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		set_precision(t_Printf *print_f, const char *prec)
+int		set_precision(t_Printf *print_f, va_list args, const char *prec)
 {
 	int		i;
 	char	*str_precision;
 
 	i = 0;
+	if (prec[i] == '*')
+	{
+		print_f->precision = va_arg(args, int);
+		return (1);
+	}
 	if (ft_isdigit(prec[i]) == 0 || prec[i] == '0')
 	{
 		print_f->precision = -1;
@@ -54,11 +59,98 @@ void	write_precision(t_Printf *print_f, char *str)
 void	write_precision_diu(t_Printf *print_f, int i)
 {
 	if (print_f->precision < 0)
-		print_f->result += ft_putstr(ft_itoa(i), print_f->precision);
-	else
+		print_f->result += 0;
+	if (print_f->precision == 0)
 	{
-		if (print_f->precision == 0)
-			print_f->precision = ft_size_num(i) + 1;
-		print_f->result += ft_putstr(ft_itoa(i), print_f->precision);
+		if (print_f->flags == 2)
+		{
+			print_f->result += ft_putstr(ft_itoa(i), ft_strlen(ft_itoa(i)));
+			if (print_f->width > print_f->precision)
+				spaces_type_width(print_f, ft_size_num(i));
+		}
+		else
+		{
+			if (print_f->flags == 1 )
+			{
+				if (i < 0)
+				{
+					print_f->result += ft_putchar('-');
+					i = ft_abs(i);
+				}
+				zero_type_width(print_f, ft_size_num(i) + 1);
+			}
+			print_f->result += ft_putstr(ft_itoa(i), ft_strlen(ft_itoa(i)));
+		}
+	}
+	else if (print_f->precision > 0)
+	{
+		if (print_f->width == print_f->precision)
+		{
+			if (print_f->precision > ft_size_num(i))
+			{
+				zero_type_width(print_f, ft_size_num(i));
+				print_f->result += ft_putstr(ft_itoa(i), ft_size_num(i));
+			}
+			if (ft_size_num(i) > print_f->precision)
+				print_f->result += ft_putstr(ft_itoa(i), print_f->precision);
+		}
+		else if (print_f->width < print_f->precision)
+		{
+			print_f->width = print_f->precision;
+			if (print_f->precision > ft_size_num(i))
+			{
+				zero_type_width(print_f, ft_size_num(i));
+				print_f->result += ft_putstr(ft_itoa(i), ft_size_num(i));
+			}
+			if (ft_size_num(i) > print_f->precision)
+				print_f->result += ft_putstr(ft_itoa(i), print_f->precision);
+		}
+		else if (print_f->width > print_f->precision)
+		{
+			if (print_f->flags == 2)
+			{
+					spaces_type_width(print_f, print_f->precision + ft_size_num(i) + 1);
+				if (print_f->precision == ft_size_num(i))
+				{
+					print_f->result += ft_putstr(ft_itoa(i), ft_size_num(i));
+					spaces_type_width(print_f, print_f->precision);
+				}
+				if (print_f->precision > ft_size_num(i))
+				{
+					print_f->width = print_f->precision;
+					zero_type_width(print_f, ft_size_num(i));
+					print_f->result += ft_putstr(ft_itoa(i), ft_size_num(i));
+					spaces_type_width(print_f, print_f->precision - ft_size_num(i));
+				}
+				if (ft_size_num(i) > print_f->precision)
+				{
+					print_f->result += ft_putstr(ft_itoa(i), ft_size_num(i));
+					spaces_type_width(print_f, ft_size_num(i));
+				}
+			}
+			else if (print_f->flags != 2)
+			{
+				if (i < 0)
+				{
+					spaces_type_width(print_f, print_f->precision + 1);
+					print_f->result += ft_putchar('-');
+					i = ft_abs(i);
+				}
+				else
+					spaces_type_width(print_f, print_f->precision);
+				if (print_f->precision == ft_size_num(i))
+					print_f->result += ft_putstr(ft_itoa(i), ft_size_num(i));
+				if (print_f->precision > ft_size_num(i))
+				{
+					print_f->width = print_f->precision;
+					zero_type_width(print_f, ft_size_num(i));
+					print_f->result += ft_putstr(ft_itoa(i), ft_size_num(i));
+					spaces_type_width(print_f, print_f->precision + ft_size_num(i));
+				}
+				if (ft_size_num(i) > print_f->precision)
+					print_f->result += ft_putstr(ft_itoa(i), print_f->precision);
+			}
+			
+		}
 	}
 }

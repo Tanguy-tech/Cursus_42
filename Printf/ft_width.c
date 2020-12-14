@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 13:16:26 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/13 12:45:28 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/14 17:22:33 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ int		add_width(t_Printf *print_f, const char *format)
 	int		i;
 
 	i = 0;
+	if (format[i] == '0' && format[i + 1] == '*')
+	{
+		print_f->flags = 1;
+		return (1);
+	}
+	if (format[i] == '0' && format[i + 1] == '-')
+		return (1);
 	while (ft_isdigit(format[i]) == 1)
 		i++;
 	if (!(str = malloc(sizeof(char) * (i + 1))))
@@ -38,8 +45,9 @@ int		add_width(t_Printf *print_f, const char *format)
 	return (i);
 }
 
-int		add_star_width(t_Printf *print_f)
+int		add_star_width(t_Printf *print_f, va_list args)
 {
+	print_f->width = va_arg(args, int);
 	print_f->star = 1;
 	return (1);
 }
