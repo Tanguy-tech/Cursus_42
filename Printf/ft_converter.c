@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 08:25:42 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/14 17:10:39 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/15 16:04:14 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	convert_cs(t_Printf *print_f, va_list args)
 	if (print_f->type == 's')
 	{
 		star_condition(print_f);
-		str = va_arg(args, char*);
+		if (!(str = va_arg(args, char*)))
+			str = "(null)";
 		if (print_f->precision == -1)
 			str = NULL;
 		str_pad_width(print_f, str);
@@ -112,7 +113,7 @@ void	convert_percent(t_Printf *print_f)
 	star_condition(print_f);
 	if (print_f->flags == 2)
 		print_f->result += ft_putchar('%');
-	if (print_f->width > 0)
+	if (print_f->width >= 0)
 	{
 		write_width_c(print_f);
 		if (print_f->flags != 2)

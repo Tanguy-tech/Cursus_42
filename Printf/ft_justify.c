@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 07:58:46 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/14 17:05:54 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/15 13:50:45 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,19 @@
 int		justify(t_Printf *print_f, const char *pad)
 {
 	int minus;
-	int plus;
+	int zero;
 	int i;
 
 	i = 0;
 	minus = 0;
-	plus = 0;
-	while (pad[i] == '+' || pad[i] == '-')
+	zero = 0;
+	while (pad[i] == '0' || pad[i] == '-')
 	{
-		if (pad[i] == '-')
-			minus++;
-		if (pad[i] == '+')
-			plus++;
+		if (pad[i] == '0')
+			print_f->flags = 1;
+		else if (pad[i] == '-')
+			print_f->flags = 2;
 		i++;
 	}
-	if (plus > 0)
-		print_f->flags = 3;
-	if (minus > 0)
-		print_f->flags = 2;
-	if (plus > 0 && minus > 0)
-		print_f->flags = 23;
-	
 	return (i);
 }

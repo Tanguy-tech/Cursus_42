@@ -6,7 +6,7 @@
 #    By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/04 10:11:35 by tbillon           #+#    #+#              #
-#    Updated: 2020/12/10 16:43:32 by tbillon          ###   ########lyon.fr    #
+#    Updated: 2020/12/15 09:56:30 by tbillon          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,9 @@ $(NAME):	$(OBJS)
 			ar rcs $(NAME) $(OBJS)
 
 all:		$(NAME)
+
+norme:		
+			norminette $(SRCS)
 
 clean:
 			$(RM) $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:24:36 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/14 13:30:17 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/15 13:24:26 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void			convert_pxx(t_Printf *print_f, va_list args);
 void			convert_percent(t_Printf *print_f);
 
 /*----- Width controller -----*/
-int				add_width(t_Printf *print_f, const char *format);
-int				add_star_width(t_Printf *print_f, va_list args);
+int				add_width(t_Printf *print_f, va_list args, const char *format);
+int				star_flag(t_Printf *print_f, va_list args, const char *format);
 void			star_condition(t_Printf *print_f);
 void			spaces_type_width(t_Printf *print_f, int len);
 void			zero_type_width(t_Printf *print_f, int len);
@@ -60,7 +60,9 @@ void			num_pad_width(t_Printf *print_f, int i);
 
 /*--- Precision controller --*/
 int				set_precision(t_Printf *print_f,  va_list args, const char *prec);
-void			write_precision(t_Printf *print_f, char *str);
-void			write_precision_diu(t_Printf *print_f, int i);
+void			write_precision_str(t_Printf *print_f, char *str);
+void			write_precision_num_1(t_Printf *print_f, int i);
+void			write_precision_num_2(t_Printf *print_f, int i);
+void			write_precision_num_3(t_Printf *print_f, int i);
 
 #endif

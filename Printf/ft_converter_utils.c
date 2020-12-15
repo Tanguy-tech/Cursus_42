@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 08:46:12 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/14 17:11:09 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/15 13:29:17 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,47 +18,39 @@ void	str_pad_width(t_Printf *print_f, char *str)
 	{
 		str = ft_strjoin("0x", str);
 		if (print_f->flags == 2)
-			write_precision(print_f, str);
+			write_precision_str(print_f, str);
 		if (print_f->width >= 0)
 		{
 			write_width_str(print_f, str);
 			if (print_f->flags != 2)
-				write_precision(print_f, str);
+				write_precision_str(print_f, str);
 		}
 	}
 	else
 	{
 		if (print_f->flags == 2)
-			write_precision(print_f, str);
+			write_precision_str(print_f, str);
 		if (print_f->width >= 0)
 		{
 			write_width_str(print_f, str);
 			if (print_f->flags != 2)
-				write_precision(print_f, str);
+				write_precision_str(print_f, str);
 		}
 	}
 }
 
 void	num_pad_width(t_Printf *print_f, int i)
 {
-	if (print_f->flags == 23)
+	if (print_f->type == 'd')
 	{
-		print_f->result += ft_putchar('+');
-		print_f->result += ft_putstr(ft_itoa(i), ft_size_num(i) + 1);
-	}
-	if (print_f->flags == 2)
-		write_precision_diu(print_f, i);
-	if (print_f->width >= 0)
-	{
-		//write_width_num(print_f, i);
-		 if (print_f->flags != 2 && print_f->flags != 3 && print_f->flags != 23)
-		 	write_precision_diu(print_f, i);
-	}
-	if (print_f->flags == 3)
-	{
-		if (print_f->flags == 3)
-			print_f->result += ft_putchar('+');
-		write_precision_diu(print_f, i);
+		if (print_f->precision == -1 && i == 0)
+			print_f->result = 0;
+		else if (print_f->width > print_f->precision)
+			write_precision_num_1(print_f, i);
+		else if (print_f->width < print_f->precision)
+			write_precision_num_2(print_f, i);
+		else if (print_f->width == print_f->precision)
+			write_precision_num_3(print_f, i);
 	}
 }
 
