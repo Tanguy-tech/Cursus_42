@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_justify.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin_left.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/10 07:58:46 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/16 15:00:58 by tbillon          ###   ########lyon.fr   */
+/*   Created: 2020/12/16 08:57:33 by tbillon           #+#    #+#             */
+/*   Updated: 2020/12/16 16:32:00 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		justify(t_Printf *print_f, const char *pad)
+char	*ft_strjoin_left(char c, char *str)
 {
-	int i;
+	char	*tab;
+	int		i;
+	int		j;
 
+	if (!(tab = malloc(sizeof(char) * (ft_strlen(str) + 2))))
+		return (0);
 	i = 0;
-	while (pad[i] == '0' || pad[i] == '-')
+	tab[i] = c;
+	i++;
+	j = 0;
+	while (str[j])
 	{
-		if (pad[i] == '0' && print_f->flags != 2)
-			print_f->flags = 1;
-		else if (pad[i] == '-')
-			print_f->flags = 2;
+		tab[i] = str[j];
 		i++;
+		j++;
 	}
-	return (i);
+	tab[i] = '\0';
+	return (tab);
 }

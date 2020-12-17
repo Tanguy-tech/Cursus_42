@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 08:46:12 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/15 13:29:17 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/17 11:42:38 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,64 @@ void	str_pad_width(t_Printf *print_f, char *str)
 
 void	num_pad_width(t_Printf *print_f, int i)
 {
-	if (print_f->type == 'd')
+	int neg;
+	if (print_f->type == 'd' || print_f->type == 'i')
 	{
-		if (print_f->precision == -1 && i == 0)
-			print_f->result = 0;
-		else if (print_f->width > print_f->precision)
-			write_precision_num_1(print_f, i);
-		else if (print_f->width < print_f->precision)
-			write_precision_num_2(print_f, i);
-		else if (print_f->width == print_f->precision)
-			write_precision_num_3(print_f, i);
+		char *str;
+		int j;
+
+		if (print_f->precision > print_f->width)
+			j = print_f->precision;
+		else
+			j = print_f->width;
+		str = calloc(sizeof(char), j + 1);
+		if (i < 0)
+		{
+			i = ft_abs(i);
+			neg = 1;
+			str = ft_strjoin_c('-', str);
+		}
+		if ((j = print_f->precision) > 0)
+		{
+			while (j - ft_strlen(ft_itoa(i)) > 0)
+			{
+				str = ft_strjoin_c('0', str);
+				j--;
+			}
+			str = ft_strjoin(str, ft_itoa(i));
+		}
+		else
+		{
+			if (print_f->precision < 0 && i == 0)
+				str = ft_strjoin(str, NULL);
+			str = ft_strjoin(str, ft_itoa(i));
+		}
+		if ((j = print_f->width) > 0 && print_f->width > print_f->precision)
+		{
+			if (print_f->precision > 0 && print_f->precision > ft_strlen(ft_itoa(i)))
+				j -= print_f->precision;
+			else
+				j -= ft_strlen(ft_itoa(i));
+			if (neg == 1)
+				j -= 1;
+			if (print_f->flags == 2)
+			{
+				while (j)
+				{
+					str = ft_strjoin_c(' ', str);
+					j--;
+				}
+			}
+			else
+			{
+				while (j)
+				{
+					str = ft_strjoin_left(' ', str);
+					j--;
+				}
+			}
+		}
+		print_f->result += ft_putstr(str, ft_strlen(str));
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 08:25:42 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/15 16:04:14 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/17 11:42:11 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ void	convert_num(t_Printf *print_f, va_list args)
 {
 	int i;
 
-	if (print_f->type == 'd' || print_f->type == 'u')
+	if (print_f->type == 'd' || print_f->type == 'i')
 	{
 		star_condition(print_f);
 		i = va_arg(args, int);
 		num_pad_width(print_f, i);
 	}
-	if (print_f->type == 'i')
+	if (print_f->type == 'u')
 	{
 		star_condition(print_f);
 		i = va_arg(args, unsigned int);
