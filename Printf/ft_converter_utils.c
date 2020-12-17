@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 08:46:12 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/17 11:42:38 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/17 13:55:32 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,54 @@ void	num_pad_width(t_Printf *print_f, int i)
 				j -= ft_strlen(ft_itoa(i));
 			if (neg == 1)
 				j -= 1;
+			if (print_f->flags == 2)
+			{
+				while (j)
+				{
+					str = ft_strjoin_c(' ', str);
+					j--;
+				}
+			}
+			else
+			{
+				while (j)
+				{
+					str = ft_strjoin_left(' ', str);
+					j--;
+				}
+			}
+		}
+		print_f->result += ft_putstr(str, ft_strlen(str));
+	}
+}
+
+void	hexa_pad_width(t_Printf *print_f, char *hexa)
+{
+	if (print_f->type == 'x' || print_f->type == 'X')
+	{
+		char	*str;
+		int		j;
+
+		if (print_f->precision > print_f->width)
+			j = print_f->precision;
+		else
+			j = print_f->width;
+		str = calloc(sizeof(char), j + 1);
+		if ((j = print_f->precision) > 0)
+		{
+			while (j - ft_strlen(hexa) > 0)
+			{
+				str = ft_strjoin_left('0', str);
+				j--;
+			}
+			str = ft_strjoin(str, hexa);
+		}
+		if ((j = print_f->width) > 0 && print_f->width > print_f->precision)
+		{
+			if (print_f->precision > 0 && print_f->precision > ft_strlen(hexa))
+				j -= print_f->precision;
+			else
+				j -= ft_strlen(hexa);
 			if (print_f->flags == 2)
 			{
 				while (j)

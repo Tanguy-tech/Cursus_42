@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:24:36 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/17 11:43:14 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/17 13:32:04 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void			write_width_num(t_Printf *print_f, int num);
 int				justify(t_Printf *print_f, const char *pad);
 void			str_pad_width(t_Printf *print_f, char *str);
 void			num_pad_width(t_Printf *print_f, int i);
+void			hexa_pad_width(t_Printf *print_f, char *hexa);
 
 /*--- Precision controller --*/
 int				set_precision(t_Printf *print_f,  va_list args, const char *prec);
