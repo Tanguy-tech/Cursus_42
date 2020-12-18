@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 12:37:18 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/16 15:20:14 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 14:05:27 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,12 @@ int		set_precision(t_Printf *print_f, va_list args, const char *prec)
 void	write_precision_str(t_Printf *print_f, char *str)
 {
 	if (print_f->precision < 0)
-		print_f->result += ft_putstr(str, print_f->precision);
+	{
+		if (ft_strcmp(str, "(null)") == 0 && print_f->width == 0)
+			print_f->result += ft_putstr(str, 6);
+		else
+			print_f->result += ft_putstr(str, print_f->precision);
+	}
 	else
 	{
 		if (print_f->precision == 0)

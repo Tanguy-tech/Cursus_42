@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 08:25:42 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/18 13:22:14 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 14:04:40 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	convert_cs(t_Printf *print_f, va_list args)
 		star_condition(print_f);
 		if (!(str = va_arg(args, char*)))
 			str = "(null)";
-		if (print_f->precision == -1)
-			str = NULL;
 		str_pad_width(print_f, str);
 	}
 }
