@@ -6,13 +6,13 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 16:47:54 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/17 11:42:30 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 12:46:10 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		size_num(int nb)
+int		size_num(long nb)
 {
 	int i;
 
@@ -32,7 +32,7 @@ int		size_num(int nb)
 	return (i);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(long n)
 {
 	char	*res;
 	int		len;

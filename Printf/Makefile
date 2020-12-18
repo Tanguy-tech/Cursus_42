@@ -6,7 +6,7 @@
 #    By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/04 10:11:35 by tbillon           #+#    #+#              #
-#    Updated: 2020/12/16 16:56:57 by tbillon          ###   ########lyon.fr    #
+#    Updated: 2020/12/18 12:21:12 by tbillon          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS	=	ft_printf.c ft_width.c ft_width_utils.c ft_parsing.c ft_converter.c\
 			libftprintf/ft_strlen.c libftprintf/ft_strjoin.c \
 			ft_converter_utils.c libftprintf/ft_atoi.c libftprintf/ft_isdigit.c \
 			libftprintf/ft_size_num.c libftprintf/ft_abs.c \
-			libftprintf/ft_strjoin_c.c libftprintf/ft_strjoin_left.c
+			libftprintf/ft_strjoin_c.c libftprintf/ft_strjoin_left.c libftprintf/ft_bzero.c libftprintf/ft_strcmp.c
 
 OBJS	= $(SRCS:.c=.o)
 

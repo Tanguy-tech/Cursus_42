@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_c.c                                     :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/16 08:57:33 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/18 12:37:27 by tbillon          ###   ########lyon.fr   */
+/*   Created: 2020/11/24 08:23:29 by tbillon           #+#    #+#             */
+/*   Updated: 2020/12/18 12:06:30 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin_c(char c, char *str)
+void	ft_bzero(void *s, int n)
 {
-	char	*tab;
-	int		i;
+	char	*ptr;
+	int	i;
 
-	if (!str)
-		return (0);
-	if (!(tab = malloc(sizeof(char) * (ft_strlen(str) + 2))))
-		return (0);
 	i = 0;
-	while (str[i])
-	{
-		tab[i] = str[i];
-		i++;
-	}
-	tab[i] = c;
-	tab[i + 1] = '\0';
-	return (tab);
+	ptr = s;
+	if (n <= 0)
+		return ;
+	while (i < n)
+		ptr[i++] = '\0';
 }

@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 08:25:42 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/18 10:29:23 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 12:57:49 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ void	convert_pxx(t_Printf *print_f, va_list args)
 	if (print_f->type == 'x')
 	{
 		star_condition(print_f);
-		str = ft_itoa_base(va_arg(args, unsigned long), "0123456789abcdef");
+		str = ft_itoa_base(va_arg(args, unsigned int), "0123456789abcdef");
 		hexa_pad_width(print_f, str);
 	}
 	if (print_f->type == 'X')
 	{
 		star_condition(print_f);
-		str = ft_itoa_base(va_arg(args, unsigned long), "0123456789ABCDEF");
+		str = ft_itoa_base(va_arg(args, unsigned int), "0123456789ABCDEF");
 		hexa_pad_width(print_f, str);
 	}
 }

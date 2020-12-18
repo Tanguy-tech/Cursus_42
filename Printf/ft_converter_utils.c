@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 08:46:12 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/18 10:53:03 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 12:57:04 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,11 @@ void	num_pad_width(t_Printf *print_f, int i)
 				j -= 1;
 			if (print_f->flags == 2)
 			{
+				if (str == NULL)
+				{
+					str = "\0";
+					j += 1;
+				}
 				while (j)
 				{
 					str = ft_strjoin_c(' ', str);
@@ -137,13 +142,21 @@ void	hexa_pad_width(t_Printf *print_f, char *hexa)
 		else
 			j = print_f->width;
 		str = calloc(sizeof(char), j + 1);
-		if ((j = print_f->precision) > 0)
+		if ((j = print_f->precision) > 0 || (print_f->flags == 1 && print_f->precision == 0))
 		{
+			if (print_f->flags == 1 && print_f->precision <= 0)
+				j = print_f->width;
 			while (j - ft_strlen(hexa) > 0)
 			{
 				str = ft_strjoin_left('0', str);
 				j--;
 			}
+			str = ft_strjoin(str, hexa);
+		}
+		else
+		{
+			if (print_f->precision < 0 && ft_strcmp(hexa, "0") == 0)
+				str = ft_strjoin(str, NULL);
 			str = ft_strjoin(str, hexa);
 		}
 		if ((j = print_f->width) > 0 && print_f->width > print_f->precision)
@@ -154,14 +167,32 @@ void	hexa_pad_width(t_Printf *print_f, char *hexa)
 				j -= ft_strlen(hexa);
 			if (print_f->flags == 2)
 			{
+				if (str == NULL)
+				{
+					str = "\0";
+					j += 1;
+				}
 				while (j)
 				{
 					str = ft_strjoin_c(' ', str);
 					j--;
 				}
 			}
-			else
+			else if (print_f->flags != 1 || (print_f->flags == 1 && print_f->width > print_f->precision && print_f->precision > 0))
 			{
+				while (j)
+				{
+					str = ft_strjoin_left(' ', str);
+					j--;
+				}
+			}
+			else if (print_f->flags == 1 && print_f->precision < 0 && print_f->width > print_f->precision)
+			{
+				if (str == NULL)
+				{
+					str = "\0";
+					j += 1;
+				}
 				while (j)
 				{
 					str = ft_strjoin_left(' ', str);

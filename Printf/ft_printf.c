@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:34:28 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/18 10:54:08 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 12:46:42 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int			ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i += parse_format(format + i + 1, print_f, args);
+			ft_bzero(print_f, sizeof(print_f));
 			print_f = reset_struct(print_f);
 		}
 		else
@@ -65,6 +66,8 @@ int			ft_printf(const char *format, ...)
 	va_end(args);
 	return (len);
 }
+
+// #include <limits.h>
 
 // int			main(void)
 // {
@@ -79,8 +82,8 @@ int			ft_printf(const char *format, ...)
 // 	str = "Tanguy";
 // 	char1 = 'O';
 // 	char2 = 'K';
-// 	//ft_printf(" |%d", ft_printf(" --0*%0*.0d*0 0*%0*.10d*0-- ", -2, 0, 21, 1));
+// 	ft_printf(" |%d", ft_printf(" --0*%0*.0d*0 0*%0*.10d*0-- ", -21, INT_MAX, 21, INT_MIN));
 // 	printf("\n");
-// 	printf(" |%d", printf(" --0*%0*.0d*0 0*%0*.10d*0-- ", -2, 0, 21, 1));
+// 	printf(" |%d", printf(" --0*%0*.0d*0 0*%0*.10d*0-- ", -21, INT_MAX, 21, INT_MIN));
 // 	return (0);
 // }
