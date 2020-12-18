@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 08:46:12 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/18 12:57:04 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 13:33:42 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,95 +39,92 @@ void	str_pad_width(t_Printf *print_f, char *str)
 	}
 }
 
-void	num_pad_width(t_Printf *print_f, int i)
+void	num_pad_width(t_Printf *print_f, long i)
 {
 	int neg;
-	if (print_f->type == 'd' || print_f->type == 'i')
-	{
-		char *str;
-		int j;
+	char *str;
+	int j;
 
-		if (print_f->precision > print_f->width)
-			j = print_f->precision;
-		else
-			j = print_f->width;
-		str = calloc(sizeof(char), j + 1);
-		if (i < 0)
+	if (print_f->precision > print_f->width)
+		j = print_f->precision;
+	else
+		j = print_f->width;
+	str = calloc(sizeof(char), j + 1);
+	if (i < 0)
+	{
+		if (i != -2147483648)
 		{
-			if (i != -2147483648)
-			{
-				i = ft_abs(i);
-				neg = 1;
-				str = ft_strjoin_c('-', str);
-			}
+			i = ft_abs(i);
+			neg = 1;
+			str = ft_strjoin_c('-', str);
 		}
-		if ((j = print_f->precision) > 0 || (print_f->flags == 1 && print_f->precision == 0))
+	}
+	if ((j = print_f->precision) > 0 || (print_f->flags == 1 && print_f->precision == 0))
+	{
+		if (print_f->flags == 1 && print_f->precision <= 0)
 		{
-			if (print_f->flags == 1 && print_f->precision <= 0)
+			if (neg == 1)
+				j = print_f->width - 1;
+			else
+				j = print_f->width;
+		}
+		while (j - ft_strlen(ft_itoa(i)) > 0)
+		{
+			str = ft_strjoin_c('0', str);
+			j--;
+		}
+		str = ft_strjoin(str, ft_itoa(i));
+	}
+	else
+	{
+		if (print_f->precision < 0 && i == 0)
+			str = ft_strjoin(str, NULL);
+		str = ft_strjoin(str, ft_itoa(i));
+	}
+	if ((j = print_f->width) > 0 && print_f->width > print_f->precision)
+	{
+		if (print_f->precision > 0 && print_f->precision > ft_strlen(ft_itoa(i)))
+			j -= print_f->precision;
+		else
+			j -= ft_strlen(ft_itoa(i));
+		if (neg == 1)
+			j -= 1;
+		if (print_f->flags == 2)
+		{
+			if (str == NULL)
 			{
-				if (neg == 1)
-					j = print_f->width - 1;
-				else
-					j = print_f->width;
+				str = "\0";
+				j += 1;
 			}
-			while (j - ft_strlen(ft_itoa(i)) > 0)
+			while (j > 0)
 			{
-				str = ft_strjoin_c('0', str);
+				str = ft_strjoin_c(' ', str);
 				j--;
 			}
-			str = ft_strjoin(str, ft_itoa(i));
 		}
-		else
+		else if (print_f->flags != 1 || (print_f->flags == 1 && print_f->width > print_f->precision && print_f->precision > 0))
 		{
-			if (print_f->precision < 0 && i == 0)
-				str = ft_strjoin(str, NULL);
-			str = ft_strjoin(str, ft_itoa(i));
+			while (j > 0)
+			{
+				str = ft_strjoin_left(' ', str);
+				j--;
+			}
 		}
-		if ((j = print_f->width) > 0 && print_f->width > print_f->precision)
+		else if (print_f->flags == 1 && print_f->precision < 0 && print_f->width > print_f->precision)
 		{
-			if (print_f->precision > 0 && print_f->precision > ft_strlen(ft_itoa(i)))
-				j -= print_f->precision;
-			else
-			 	j -= ft_strlen(ft_itoa(i));
-			if (neg == 1)
-				j -= 1;
-			if (print_f->flags == 2)
+			if (str == NULL)
 			{
-				if (str == NULL)
-				{
-					str = "\0";
-					j += 1;
-				}
-				while (j)
-				{
-					str = ft_strjoin_c(' ', str);
-					j--;
-				}
+				str = "\0";
+				j += 1;
 			}
-			else if (print_f->flags != 1 || (print_f->flags == 1 && print_f->width > print_f->precision && print_f->precision > 0))
+			while (j > 0)
 			{
-				while (j)
-				{
-					str = ft_strjoin_left(' ', str);
-					j--;
-				}
-			}
-			else if (print_f->flags == 1 && print_f->precision < 0 && print_f->width > print_f->precision)
-			{
-				if (str == NULL)
-				{
-					str = "\0";
-					j += 1;
-				}
-				while (j)
-				{
-					str = ft_strjoin_left(' ', str);
-					j--;
-				}
+				str = ft_strjoin_left(' ', str);
+				j--;
 			}
 		}
-		print_f->result += ft_putstr(str, ft_strlen(str));
 	}
+	print_f->result += ft_putstr(str, ft_strlen(str));
 }
 
 void	hexa_pad_width(t_Printf *print_f, char *hexa)
@@ -172,7 +169,7 @@ void	hexa_pad_width(t_Printf *print_f, char *hexa)
 					str = "\0";
 					j += 1;
 				}
-				while (j)
+				while (j > 0)
 				{
 					str = ft_strjoin_c(' ', str);
 					j--;
@@ -180,7 +177,7 @@ void	hexa_pad_width(t_Printf *print_f, char *hexa)
 			}
 			else if (print_f->flags != 1 || (print_f->flags == 1 && print_f->width > print_f->precision && print_f->precision > 0))
 			{
-				while (j)
+				while (j > 0)
 				{
 					str = ft_strjoin_left(' ', str);
 					j--;
@@ -193,7 +190,7 @@ void	hexa_pad_width(t_Printf *print_f, char *hexa)
 					str = "\0";
 					j += 1;
 				}
-				while (j)
+				while (j > 0)
 				{
 					str = ft_strjoin_left(' ', str);
 					j--;

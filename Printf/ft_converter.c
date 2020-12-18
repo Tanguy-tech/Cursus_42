@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 08:25:42 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/18 12:57:49 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 13:22:14 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	convert_cs(t_Printf *print_f, va_list args)
 
 void	convert_num(t_Printf *print_f, va_list args)
 {
-	int i;
+	long i;
 
 	if (print_f->type == 'd' || print_f->type == 'i')
 	{
@@ -67,18 +67,7 @@ void	convert_num(t_Printf *print_f, va_list args)
 	{
 		star_condition(print_f);
 		i = va_arg(args, unsigned int);
-		if (print_f->flags == 2 || print_f->flags == 3)
-		{
-			if (print_f->flags == 3)
-				print_f->result += ft_putchar('+');
-			print_f->result += ft_putstr(ft_itoa(i), ft_size_num(i));
-		}
-		if (print_f->width >= 0)
-		{
-			write_width_num(print_f, i);
-			if (print_f->flags != 2 && print_f->flags != 3)
-				print_f->result += ft_putstr(ft_itoa(i), ft_size_num(i));
-		}
+		num_pad_width(print_f, i);
 	}
 }
 
