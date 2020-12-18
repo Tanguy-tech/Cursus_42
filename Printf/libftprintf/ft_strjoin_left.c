@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 08:57:33 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/16 16:32:00 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 10:42:23 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strjoin_left(char c, char *str)
 	int		i;
 	int		j;
 
+	if (!str)
+		return (0);
 	if (!(tab = malloc(sizeof(char) * (ft_strlen(str) + 2))))
 		return (0);
 	i = 0;

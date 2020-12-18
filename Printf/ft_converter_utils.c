@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 08:46:12 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/17 13:55:32 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 10:53:03 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,22 @@ void	num_pad_width(t_Printf *print_f, int i)
 		str = calloc(sizeof(char), j + 1);
 		if (i < 0)
 		{
-			i = ft_abs(i);
-			neg = 1;
-			str = ft_strjoin_c('-', str);
+			if (i != -2147483648)
+			{
+				i = ft_abs(i);
+				neg = 1;
+				str = ft_strjoin_c('-', str);
+			}
 		}
-		if ((j = print_f->precision) > 0)
+		if ((j = print_f->precision) > 0 || (print_f->flags == 1 && print_f->precision == 0))
 		{
+			if (print_f->flags == 1 && print_f->precision <= 0)
+			{
+				if (neg == 1)
+					j = print_f->width - 1;
+				else
+					j = print_f->width;
+			}
 			while (j - ft_strlen(ft_itoa(i)) > 0)
 			{
 				str = ft_strjoin_c('0', str);
@@ -78,7 +88,7 @@ void	num_pad_width(t_Printf *print_f, int i)
 			if (print_f->precision > 0 && print_f->precision > ft_strlen(ft_itoa(i)))
 				j -= print_f->precision;
 			else
-				j -= ft_strlen(ft_itoa(i));
+			 	j -= ft_strlen(ft_itoa(i));
 			if (neg == 1)
 				j -= 1;
 			if (print_f->flags == 2)
@@ -89,8 +99,21 @@ void	num_pad_width(t_Printf *print_f, int i)
 					j--;
 				}
 			}
-			else
+			else if (print_f->flags != 1 || (print_f->flags == 1 && print_f->width > print_f->precision && print_f->precision > 0))
 			{
+				while (j)
+				{
+					str = ft_strjoin_left(' ', str);
+					j--;
+				}
+			}
+			else if (print_f->flags == 1 && print_f->precision < 0 && print_f->width > print_f->precision)
+			{
+				if (str == NULL)
+				{
+					str = "\0";
+					j += 1;
+				}
 				while (j)
 				{
 					str = ft_strjoin_left(' ', str);

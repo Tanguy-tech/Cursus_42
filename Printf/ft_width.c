@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 13:16:26 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/15 15:30:10 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 10:41:08 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		add_width(t_Printf *print_f, va_list args, const char *format)
 	}
 	str[i] = '\0';
 	print_f->width = ft_atoi(str);
-	free(str);
 	i = ft_strlen(str);
+	free(str);
 	return (i);
 }
