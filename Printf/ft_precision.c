@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 12:37:18 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/21 11:07:01 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/21 11:21:08 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		set_precision(t_Printf *print_f, va_list args, const char *prec)
 	else
 		print_f->precision = ft_atoi(str_precision);
 	i = ft_strlen(str_precision);
-	//free(str_precision);
+	free(str_precision);
 	return (i);
 }
 
@@ -65,4 +65,3 @@ void	write_precision_str(t_Printf *print_f, char *str)
 		print_f->result += ft_putstr(str, print_f->precision);
 	}
 }
-

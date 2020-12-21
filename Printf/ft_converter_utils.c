@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 08:46:12 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/21 10:44:24 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/21 11:24:54 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	str_pad_width(t_Printf *print_f, char *str)
 
 void	num_pad_width(t_Printf *print_f, long i)
 {
-	int neg;
-	char *str;
-	int j;
+	int		neg;
+	char	*str;
+	int		j;
 
 	neg = 0;
 	if (print_f->precision > print_f->width)
@@ -132,16 +132,16 @@ void	num_pad_width(t_Printf *print_f, long i)
 		}
 	}
 	print_f->result += ft_putstr(str, ft_strlen(str));
-	//free(str);
+	free(str);
 }
 
 void	hexa_pad_width(t_Printf *print_f, char *hexa)
 {
+	char	*str;
+	int		j;
+
 	if (print_f->type == 'x' || print_f->type == 'X')
 	{
-		char	*str;
-		int		j;
-
 		if (print_f->precision > print_f->width)
 			j = print_f->precision;
 		else
@@ -212,7 +212,7 @@ void	hexa_pad_width(t_Printf *print_f, char *hexa)
 			}
 		}
 		print_f->result += ft_putstr(str, ft_strlen(str));
-		//free(str);
+		free(str);
 	}
 }
 

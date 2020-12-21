@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:34:28 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/21 10:51:16 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/21 11:16:03 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,25 @@ int			ft_printf(const char *format, ...)
 	return (len);
 }
 
-// #include <limits.h>
+#include <limits.h>
 
-// int			main(void)
-// {
-// 	char			*str;
-// 	int				test;
-// 	char			char1;
-// 	char			char2;
-// 	unsigned int	hex;
+int			main(void)
+{
+	char			*str;
+	int				test;
+	char			char1;
+	char			char2;
+	unsigned int	hex;
 
-// 	test = 123456789;
-// 	hex = 2147483647;
-// 	str = "Tanguy";
-// 	char1 = 'O';
-// 	char2 = 'K';
-// 	ft_printf(" |%d", ft_printf("%-2s, %.s, %-4s, %-2.4s, %-8.12s, %3s, %8s, %---2s, %.*s, %.0s, %.1s, %.2s, %.4s, %.8s", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 12, NULL, NULL, NULL, NULL, NULL, NULL));
-// 	printf("\n");
-// 	printf(" |%d", printf("%-2s, %.s, %-4s, %-2.4s, %-8.12s, %3s, %8s, %---2s, %.*s, %.0s, %.1s, %.2s, %.4s, %.8s", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 12, NULL, NULL, NULL, NULL, NULL, NULL));
-// 	return (0);
-// }
+	test = 123456789;
+	hex = 2147483647;
+	str = "Tanguy";
+	char1 = 'O';
+	char2 = 'K';
+	ft_printf(" |%d", ft_printf("%-2s, %.s, %-4s, %-2.4s, %-8.12s, %3s, %8s, %---2s, %.*s, %.0s, %.1s, %.2s, %.4s, %.8s", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 12, NULL, NULL, NULL, NULL, NULL, NULL));
+	printf("\n");
+	printf(" |%d", printf("%-2s, %.s, %-4s, %-2.4s, %-8.12s, %3s, %8s, %---2s, %.*s, %.0s, %.1s, %.2s, %.4s, %.8s", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 12, NULL, NULL, NULL, NULL, NULL, NULL));
+	while (1)
+	{}
+	return (0);
+}

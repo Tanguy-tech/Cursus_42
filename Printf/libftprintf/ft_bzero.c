@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 08:23:29 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/18 12:06:30 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/21 11:13:27 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_bzero(void *s, int n)
 {
 	char	*ptr;
-	int	i;
+	int		i;
 
 	i = 0;
 	ptr = s;
