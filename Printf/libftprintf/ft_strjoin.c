@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:16:10 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/07 10:30:53 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 17:23:18 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[++j] && i < len_tot)
 		tab[i++] = s2[j];
 	tab[i] = '\0';
+	//free(s1);
 	return (tab);
 }

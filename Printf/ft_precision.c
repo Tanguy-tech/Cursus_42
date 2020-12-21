@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 12:37:18 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/18 14:05:27 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/21 11:07:01 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,11 @@ int		set_precision(t_Printf *print_f, va_list args, const char *prec)
 	{
 		arg = va_arg(args, int);
 		if (arg < 0)
+			arg = 0;
+		else if (arg == 0)
 			arg = -1;
 		print_f->precision = arg;
 		return (i + 1);
-	}
-	if (ft_isdigit(prec[i]) == 0 || prec[i] == '0')
-	{
-		print_f->precision = -1;
-		return (1);
 	}
 	while (ft_isdigit(prec[i]) == 1)
 		i++;
@@ -43,9 +40,15 @@ int		set_precision(t_Printf *print_f, va_list args, const char *prec)
 		i++;
 	}
 	str_precision[i] = '\0';
-	print_f->precision = ft_atoi(str_precision);
-	free(str_precision);
+	if (ft_atoi(str_precision) == 0)
+	{
+		print_f->precision = -1;
+		return (1);
+	}
+	else
+		print_f->precision = ft_atoi(str_precision);
 	i = ft_strlen(str_precision);
+	//free(str_precision);
 	return (i);
 }
 
@@ -53,10 +56,7 @@ void	write_precision_str(t_Printf *print_f, char *str)
 {
 	if (print_f->precision < 0)
 	{
-		if (ft_strcmp(str, "(null)") == 0 && print_f->width == 0)
-			print_f->result += ft_putstr(str, 6);
-		else
-			print_f->result += ft_putstr(str, print_f->precision);
+		print_f->result += ft_putstr(str, print_f->precision);
 	}
 	else
 	{

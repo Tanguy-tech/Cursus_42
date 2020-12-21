@@ -6,7 +6,7 @@
 /*   By: tbillon <tbillon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 08:46:12 by tbillon           #+#    #+#             */
-/*   Updated: 2020/12/18 13:33:42 by tbillon          ###   ########lyon.fr   */
+/*   Updated: 2020/12/21 10:44:24 by tbillon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	num_pad_width(t_Printf *print_f, long i)
 	char *str;
 	int j;
 
+	neg = 0;
 	if (print_f->precision > print_f->width)
 		j = print_f->precision;
 	else
@@ -78,8 +79,14 @@ void	num_pad_width(t_Printf *print_f, long i)
 	else
 	{
 		if (print_f->precision < 0 && i == 0)
-			str = ft_strjoin(str, NULL);
-		str = ft_strjoin(str, ft_itoa(i));
+		{
+			if (print_f->width > 0)
+				str = ft_strjoin(str, " ");
+			else
+				str = ft_strjoin(str, NULL);
+		}
+		else
+			str = ft_strjoin(str, ft_itoa(i));
 	}
 	if ((j = print_f->width) > 0 && print_f->width > print_f->precision)
 	{
@@ -125,6 +132,7 @@ void	num_pad_width(t_Printf *print_f, long i)
 		}
 	}
 	print_f->result += ft_putstr(str, ft_strlen(str));
+	//free(str);
 }
 
 void	hexa_pad_width(t_Printf *print_f, char *hexa)
@@ -153,8 +161,14 @@ void	hexa_pad_width(t_Printf *print_f, char *hexa)
 		else
 		{
 			if (print_f->precision < 0 && ft_strcmp(hexa, "0") == 0)
-				str = ft_strjoin(str, NULL);
-			str = ft_strjoin(str, hexa);
+			{
+				if (print_f->width > 0)
+					str = ft_strjoin(str, " ");
+				else
+					str = ft_strjoin(str, NULL);
+			}
+			else
+				str = ft_strjoin(str, hexa);
 		}
 		if ((j = print_f->width) > 0 && print_f->width > print_f->precision)
 		{
@@ -198,6 +212,7 @@ void	hexa_pad_width(t_Printf *print_f, char *hexa)
 			}
 		}
 		print_f->result += ft_putstr(str, ft_strlen(str));
+		//free(str);
 	}
 }
 
